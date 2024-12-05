@@ -1,0 +1,21 @@
+<h3>Dashboard Overview</h3>
+<div class="overview-stats">
+  <div class="stat-card">
+    <h4>Total Reports</h4>
+    <p id="totalReports">0</p>
+  </div>
+  <div class="stat-card">
+    <h4>Recent Activity</h4>
+    <p id="recentActivity">No new reports</p>
+  </div>
+</div>
+<script>
+  // Fetch and display data for the overview section
+  fetch('/api/overview-data')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('totalReports').textContent = data.totalReports;
+      document.getElementById('recentActivity').textContent = data.recentActivity;
+    })
+    .catch(error => console.error('Error fetching overview data:', error));
+</script>

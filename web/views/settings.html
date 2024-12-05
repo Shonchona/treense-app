@@ -1,0 +1,25 @@
+<h3>Settings</h3>
+<form id="settingsForm">
+  <label for="emailNotifications">Enable Email Notifications:</label>
+  <input type="checkbox" id="emailNotifications" name="emailNotifications" />
+
+  <label for="theme">Dashboard Theme:</label>
+  <select id="theme" name="theme">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+  </select>
+
+  <button type="submit">Save Settings</button>
+</form>
+<script>
+  const settingsForm = document.getElementById('settingsForm');
+  settingsForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const settings = {
+      emailNotifications: document.getElementById('emailNotifications').checked,
+      theme: document.getElementById('theme').value,
+    };
+    console.log('Saving settings:', settings);
+    // Save settings via API
+  });
+</script>

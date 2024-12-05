@@ -1,0 +1,38 @@
+<h3>Report History</h3>
+<table id="reportTable">
+  <thead>
+    <tr>
+      <th>Report ID</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Reports will be dynamically loaded here -->
+  </tbody>
+</table>
+<script>
+  // Fetch and display report history
+  fetch('/api/reports')
+    .then(response => response.json())
+    .then(data => {
+      const reportTableBody = document.querySelector('#reportTable tbody');
+      reportTableBody.innerHTML = ''; // Clear existing rows
+      data.reports.forEach(report => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${report.id}</td>
+          <td>${report.date}</td>
+          <td>${report.status}</td>
+          <td><button onclick="viewReport(${report.id})">View</button></td>
+        `;
+        reportTableBody.appendChild(row);
+      });
+    })
+    .catch(error => console.error('Error fetching reports:', error));
+
+  function viewReport(reportId) {
+    alert(`View details for report ID: ${reportId}`);
+  }
+</script>

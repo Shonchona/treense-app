@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/css/dsstyles.css">
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Admin Dashboard</h2>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="overview.html" class="tab-link">Overview</a></li>
+          <li><a href="report-history.html" class="tab-link">Report History</a></li>
+          <li><a href="analytics.html" class="tab-link">Analytics</a></li>
+          <li><a href="settings.html" class="tab-link">Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <div id="tab-content">
+        <!-- Loaded tab content will appear here -->
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Dynamic tab loading
+    document.querySelectorAll('.tab-link').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const tabUrl = this.getAttribute('href');
+
+        // Load the content of the clicked tab
+        fetch(tabUrl)
+          .then(response => response.text())
+          .then(html => {
+            document.getElementById('tab-content').innerHTML = html;
+          })
+          .catch(error => {
+            console.error('Error loading tab:', error);
+            document.getElementById('tab-content').innerHTML = '<p>Error loading tab. Please try again.</p>';
+          });
+      });
+    });
+
+    // Automatically load the first tab on page load
+    document.querySelector('.tab-link').click();
+  </script>
+</body>
+</html>
